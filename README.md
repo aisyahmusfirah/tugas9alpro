@@ -1,2 +1,3 @@
 # tugas9alpro
-Create student's dashboard GUI with tkinter
+Make student productivity toolkit as our algoritma pemrograman group homework week 9.
+
