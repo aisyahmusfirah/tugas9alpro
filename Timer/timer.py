@@ -30,8 +30,12 @@ class Timer:
             time_str = f"{minutes:02d}:{seconds:02d}"
             self.timer_label.config(text=time_str)
             remaining_time -= 1
-            self.master.after(1000, self.countdown, remaining_time)  # Call countdown every second
+            self.master.after(1000, self.countdown, remaining_time)
         else:
             self.timer_label.config(text="Time's up!")
             self.start_button.config(state=tk.NORMAL)
 
+root = tk.Tk()
+root.title("Timer")
+timer = Timer(root)
+root.mainloop()
