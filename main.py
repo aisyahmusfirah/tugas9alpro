@@ -1,7 +1,8 @@
 from Timer.timer import Timer
 from Notes.notes import Notes
-from Todolist.todolist import Todoist
+from Todolist.todolist import Todolist
 from Calculator.calculator import Calculator
+from BONUS.quotes_generator import BONUS
 
 # Fungsi untuk setiap fitur
 def open_timer():
@@ -19,7 +20,7 @@ def open_calculator():
 # Membuat aplikasi utama
 app = Tk()
 app.title("Student Productivity Toolkit")
-app.geometry("400x300")  # Ukuran jendela aplikasi
+app.geometry("400x300")
 
 # Membuat menu navigasi
 menu_bar = Menu(app)
