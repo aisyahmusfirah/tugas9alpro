@@ -1,41 +1,70 @@
+import tkinter as tk
 from Timer.timer import Timer
 from Notes.notes import Notes
 from Todolist.todolist import Todolist
 from Calculator.calculator import Calculator
-from BONUS.quotes_generator import BONUS
+from BONUS.quotes_generator import MotivationalQuoteApp
 
-# Fungsi untuk setiap fitur
-def open_timer():
-    TimerApp()
+class StudentProductivityToolkit:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Student Productivity Toolkit")
+        self.root.geometry("400x400")
+        self.root.config(bg="#f7f7f7")
 
-def open_notes():
-    NotesApp()
+        self.create_main_menu()
 
-def open_todo_list():
-    ToDoListApp()
+    def create_main_menu(self):
+        for widget in self.root.winfo_children():
+            widget.destroy()
 
-def open_calculator():
-    CalculatorApp()
+        tk.Label(
+            self.root,
+            text="Student Productivity Toolkit",
+            font=("Arial", 18, "bold"),
+            bg="#f7f7f7",
+            fg="#333"
+        ).pack(pady=20)
 
-# Membuat aplikasi utama
-app = Tk()
-app.title("Student Productivity Toolkit")
-app.geometry("400x300")
+        self.create_button("Timer", self.open_timer)
+        self.create_button("Notes", self.open_notes)
+        self.create_button("To-Do List", self.open_todo_list)
+        self.create_button("Calculator", self.open_calculator)
+        self.create_button("Motivational Quotes", self.open_bonus)
 
-# Membuat menu navigasi
-menu_bar = Menu(app)
+    def create_button(self, label, command):
+        tk.Button(
+            self.root,
+            text=label,
+            font=("Arial", 14),
+            bg="#FFB6C1",
+            fg="black",
+            width=20,
+            command=command
+        ).pack(pady=10)
 
-# Menu "Features"
-features_menu = Menu(menu_bar, tearoff=0)
-features_menu.add_command(label="Timer", command=open_timer)
-features_menu.add_command(label="Notes", command=open_notes)
-features_menu.add_command(label="To-Do List", command=open_todo_list)
-features_menu.add_command(label="Calculator", command=open_calculator)
-menu_bar.add_cascade(label="Features", menu=features_menu)
+    def open_timer(self):
+        self.switch_to_feature(Timer)
 
-# Menambahkan menu ke aplikasi
-app.config(menu=menu_bar)
+    def open_notes(self):
+        self.switch_to_feature(Notes)
 
-# Menjalankan aplikasi
-app.mainloop()
+    def open_todo_list(self):
+        self.switch_to_feature(Todolist)
 
+    def open_calculator(self):
+        self.switch_to_feature(Calculator)
+
+    def open_bonus(self):
+        self.switch_to_feature(MotivationalQuoteApp)
+
+    def switch_to_feature(self, feature_class):
+        """Switch to a specific feature by initializing its class."""
+        for widget in self.root.winfo_children():
+            widget.destroy() 
+        feature_class(self.root)  
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = StudentProductivityToolkit(root)
+    root.mainloop()
